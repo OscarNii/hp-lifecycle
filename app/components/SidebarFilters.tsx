@@ -37,7 +37,7 @@ export default function SidebarFilters({
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-sm p-5">
+    <div className="bg-white/70 backdrop-blur-md rounded-xl shadow-lg p-4 sm:p-5 border border-white/20 sticky top-24">
       <div className="flex items-center gap-2 mb-4">
         <Filter className="w-5 h-5 text-[#0096D6]" />
         <h3 className="font-semibold text-[#0A1F44]">Filters</h3>
@@ -50,7 +50,7 @@ export default function SidebarFilters({
             <select
               value={selectedYear}
               onChange={handleYearChange}
-              className="w-full px-3 py-2 border border-gray-200 rounded-lg appearance-none bg-white focus:outline-none focus:ring-2 focus:ring-[#0096D6] focus:border-transparent text-sm"
+              className="w-full px-3 py-2.5 border border-gray-200 rounded-xl appearance-none bg-white/80 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-[#0096D6] focus:border-transparent text-sm shadow-sm"
             >
               <option value="">All Years</option>
               {yearOptions.map((option) => (
@@ -69,7 +69,7 @@ export default function SidebarFilters({
             <select
               value={selectedCategory}
               onChange={handleCategoryChange}
-              className="w-full px-3 py-2 border border-gray-200 rounded-lg appearance-none bg-white focus:outline-none focus:ring-2 focus:ring-[#0096D6] focus:border-transparent text-sm"
+              className="w-full px-3 py-2.5 border border-gray-200 rounded-xl appearance-none bg-white/80 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-[#0096D6] focus:border-transparent text-sm shadow-sm"
             >
               <option value="">All Categories</option>
               {categoryOptions.map((option) => (
@@ -85,22 +85,21 @@ export default function SidebarFilters({
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">Hardware Specs</label>
           <div className="space-y-2">
-            <label className="flex items-center gap-2 text-sm text-gray-600">
-              <input type="checkbox" className="rounded border-gray-300 text-[#0096D6] focus:ring-[#0096D6]" />
-              <span>Intel Processor</span>
-            </label>
-            <label className="flex items-center gap-2 text-sm text-gray-600">
-              <input type="checkbox" className="rounded border-gray-300 text-[#0096D6] focus:ring-[#0096D6]" />
-              <span>AMD Processor</span>
-            </label>
-            <label className="flex items-center gap-2 text-sm text-gray-600">
-              <input type="checkbox" className="rounded border-gray-300 text-[#0096D6] focus:ring-[#0096D6]" />
-              <span>16GB+ RAM</span>
-            </label>
-            <label className="flex items-center gap-2 text-sm text-gray-600">
-              <input type="checkbox" className="rounded border-gray-300 text-[#0096D6] focus:ring-[#0096D6]" />
-              <span>SSD Storage</span>
-            </label>
+            {[
+              { label: 'Intel Processor', checked: false },
+              { label: 'AMD Processor', checked: false },
+              { label: '16GB+ RAM', checked: false },
+              { label: 'SSD Storage', checked: false },
+            ].map((spec, index) => (
+              <label key={index} className="flex items-center gap-2 text-sm text-gray-600 cursor-pointer p-2 rounded-lg hover:bg-blue-50/50 transition-colors">
+                <input 
+                  type="checkbox" 
+                  className="rounded border-gray-300 text-[#0096D6] focus:ring-[#0096D6] w-4 h-4" 
+                  defaultChecked={spec.checked}
+                />
+                <span>{spec.label}</span>
+              </label>
+            ))}
           </div>
         </div>
       </div>

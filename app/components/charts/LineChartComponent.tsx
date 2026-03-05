@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 interface LineChartComponentProps {
@@ -7,6 +8,20 @@ interface LineChartComponentProps {
 }
 
 export default function LineChartComponent({ data }: LineChartComponentProps) {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return (
+      <div className="w-full h-64 flex items-center justify-center bg-gray-50 rounded-lg">
+        <span className="text-gray-400 text-sm">Loading chart...</span>
+      </div>
+    );
+  }
+
   return (
     <div className="w-full h-64">
       <ResponsiveContainer width="100%" height="100%">

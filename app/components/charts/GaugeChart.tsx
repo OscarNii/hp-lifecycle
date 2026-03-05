@@ -1,24 +1,42 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
 
 interface GaugeChartProps {
-  data: Array<{ name: string; value: number; fill: string }>;
+  value?: number;
+  data?: Array<{ name: string; value: number; fill: string }>;
 }
 
-export default function GaugeChart({ data }: GaugeChartProps) {
-  const total = data.reduce((acc, item) => acc + item.value, 0);
+export default function GaugeChart({ value = 0, data }: GaugeChartProps) {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Default gauge data if not provided
+  const chartData = data || [
+    { name: 'Complete', value: value, fill: '#0096D6' },
+    { name: 'Remaining', value: 100 - value, fill: '#E5E7EB' },
+  ];
   
-  // Calculate the angles for semi-circle
-  const startAngle = 180;
-  const endAngle = 0;
+  const total = chartData.reduce((acc, item) => acc + item.value, 0);
+  
+  if (!mounted) {
+    return (
+      <div className="w-full h-40 flex items-center justify-center bg-gray-50 rounded-lg">
+        <span className="text-gray-400 text-sm">Loading chart...</span>
+      </div>
+    );
+  }
   
   return (
     <div className="relative w-full h-40">
       <ResponsiveContainer width="100%" height="100%">
         <PieChart>
           <Pie
-            data={data}
+            data={chartData}
             cx="50%"
             cy="100%"
             startAngle={180}
@@ -28,7 +46,7 @@ export default function GaugeChart({ data }: GaugeChartProps) {
             paddingAngle={2}
             dataKey="value"
           >
-            {data.map((entry, index) => (
+            {chartData.map((entry, index) => (
               <Cell key={`cell-${index}`} fill={entry.fill} />
             ))}
           </Pie>
@@ -37,8 +55,8 @@ export default function GaugeChart({ data }: GaugeChartProps) {
       </ResponsiveContainer>
       <div className="absolute inset-0 flex items-end justify-center pb-2">
         <div className="text-center">
-          <span className="text-3xl font-bold text-[#0A1F44]">{total}</span>
-          <p className="text-xs text-gray-500">Total Updates</p>
+          <span className="text-3xl font-bold text-[#0A1F44]">{value}%</span>
+          <p className="text-xs text-gray-500">Complete</p>
         </div>
       </div>
     </div>

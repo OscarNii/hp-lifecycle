@@ -1,11 +1,26 @@
 @import "tailwindcss";
 
 :root {
+  /* HP Color Palette */
+  --hp-blue: #0096D6;
+  --hp-dark-blue: #0A1F44;
+  --hp-light-gray: #F5F7FA;
+  --hp-accent-green: #2ECC71;
+  --hp-accent-red: #E74C3C;
+  --hp-accent-orange: #F39C12;
+  
+  /* Backgrounds */
   --background: #ffffff;
   --foreground: #171717;
 }
 
 @theme inline {
+  --color-hp-blue: var(--hp-blue);
+  --color-hp-dark-blue: var(--hp-dark-blue);
+  --color-hp-light-gray: var(--hp-light-gray);
+  --color-hp-green: var(--hp-accent-green);
+  --color-hp-red: var(--hp-accent-red);
+  --color-hp-orange: var(--hp-accent-orange);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
@@ -20,7 +35,54 @@
 }
 
 body {
-  background: var(--background);
+  background: var(--hp-light-gray);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a1a1a1;
+}
+
+/* Card styles */
+.dashboard-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  padding: 20px;
+  transition: all 0.3s;
+}
+
+.dashboard-card:hover {
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* Button styles */
+.btn-primary {
+  background: #0096D6;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.btn-primary:hover {
+  background: #0077b3;
 }

@@ -29,7 +29,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 - Dashboard with live HP product search
 - Version Explorer with timeline and comparison
-- Evolution Portal with product family tree
+- Evolution Portal with product family treee
 - Technical Hub with hardware/BIOS details
 - API & Insights with code examples
 

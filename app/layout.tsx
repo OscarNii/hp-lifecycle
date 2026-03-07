@@ -4,6 +4,7 @@ import "./globals.css";
 import Sidebar from "./components/Sidebar";
 import { Providers } from "./components/Providers";
 import { ToastProvider } from "./components/Toast";
+import { FloatingTriggers } from "./components/FloatingTriggers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -31,6 +32,9 @@ export default function RootLayout({
                 {children}
               </main>
             </div>
+            
+            {/* Floating AI Triggers */}
+            <FloatingTriggers />
           </ToastProvider>
         </Providers>
       </body>

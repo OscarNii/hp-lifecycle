@@ -1,19 +1,20 @@
 'use client';
 
 import { ReactNode } from 'react';
-import { Clock, AlertTriangle, PieChart } from 'lucide-react';
+import { Clock, AlertTriangle, PieChart, Scan } from 'lucide-react';
 
 interface DashboardCardProps {
   title: string;
   children: ReactNode;
   className?: string;
-  icon?: 'clock' | 'alert' | 'chart';
+  icon?: 'clock' | 'alert' | 'chart' | 'scan';
 }
 
 const iconMap = {
   clock: Clock,
   alert: AlertTriangle,
   chart: PieChart,
+  scan: Scan,
 };
 
 export default function DashboardCard({ title, children, className = '', icon }: DashboardCardProps) {

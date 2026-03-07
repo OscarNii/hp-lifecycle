@@ -1,12 +1,13 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Search, Loader2, Smartphone, Monitor, Tablet, X, ExternalLink, Cpu, HardDrive, Monitor as MonitorIcon, Scale } from 'lucide-react';
+import { Search, Loader2, Smartphone, Monitor, Tablet, X, ExternalLink, Cpu, HardDrive, Monitor as MonitorIcon, Scale, QrCode } from 'lucide-react';
 import dynamic from 'next/dynamic';
 import DashboardCard from './components/DashboardCard';
 import { Skeleton } from './components/Skeleton';
 import { useDebounce } from './hooks/useDebounce';
 import { searchHPProducts, HPProduct } from './data/mockData';
+import { DigitalPassport } from './components/DigitalPassport';
 
 // Dynamic imports for heavy chart components
 const GaugeChart = dynamic(() => import('./components/charts/GaugeChart'), {
@@ -25,6 +26,7 @@ export default function Dashboard() {
   const [selectedProduct, setSelectedProduct] = useState<HPProduct | null>(null);
   const [isSearching, setIsSearching] = useState(false);
   const [showResults, setShowResults] = useState(false);
+  const [showPassportScanner, setShowPassportScanner] = useState(false);
   
   // Debounce search input (300ms)
   const debouncedQuery = useDebounce(searchQuery, 300);
@@ -69,6 +71,11 @@ export default function Dashboard() {
 
   return (
     <div className="min-h-screen">
+      {/* Digital Passport Scanner Modal */}
+      {showPassportScanner && (
+        <DigitalPassport onClose={() => setShowPassportScanner(false)} />
+      )}
+
       {/* Hero Section with Premium Glass Effect */}
       <div className="relative overflow-hidden bg-gradient-to-br from-[#0A1F44] via-[#0d2545] to-[#0096D6]/80">
         {/* Animated Background Elements */}
@@ -214,6 +221,30 @@ export default function Dashboard() {
 
       {/* Cards Grid - Premium Glass Cards */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+        {/* Digital Passport Card - New Feature */}
+        <div className="mb-6">
+          <DashboardCard title="HP Digital Passport" icon="scan">
+            <div 
+              onClick={() => setShowPassportScanner(true)}
+              className="cursor-pointer group"
+            >
+              <div className="flex items-center gap-6 p-4 rounded-2xl bg-gradient-to-r from-[#0096D6]/10 via-[#0096D6]/5 to-transparent border border-[#0096D6]/20 hover:border-[#0096D6]/40 transition-all hover:shadow-lg hover:shadow-[#0096D6]/10">
+                <div className="w-16 h-16 bg-gradient-to-br from-[#0096D6] to-[#0077b3] rounded-2xl flex items-center justify-center shadow-lg shadow-[#0096D6]/30 group-hover:scale-110 transition-transform">
+                  <QrCode className="w-8 h-8 text-white" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-lg font-bold text-[#0A1F44] group-hover:text-[#0096D6] transition-colors">Scan Device Passport</h3>
+                  <p className="text-sm text-gray-500 mt-1">Use NFC or QR code to instantly access device health, warranty, and lifecycle information</p>
+                </div>
+                <div className="px-4 py-2 bg-[#0096D6] text-white rounded-xl font-medium group-hover:bg-[#0077b3] transition-colors flex items-center gap-2">
+                  <span>Scan Now</span>
+                  <ExternalLink className="w-4 h-4" />
+                </div>
+              </div>
+            </div>
+          </DashboardCard>
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           
           {/* Card 1: Recent Lookups - Premium Glass */}

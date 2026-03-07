@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Navbar from "./components/Navbar";
+import Sidebar from "./components/Sidebar";
 import { Providers } from "./components/Providers";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -20,8 +20,15 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Providers>
-          <Navbar />
-          {children}
+          <div className="flex min-h-screen">
+            {/* Sidebar - Fixed left */}
+            <Sidebar />
+            
+            {/* Main Stage - Scrollable right content */}
+            <main className="flex-1 ml-0 md:ml-64 min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50/30">
+              {children}
+            </main>
+          </div>
         </Providers>
       </body>
     </html>

@@ -18,11 +18,13 @@ export function FloatingTriggers() {
         onClose={() => setShowCommandPalette(false)} 
       />
       
-      <DigitalPassport 
-        deviceId={showPassport ? 'demo' : undefined}
-        onClose={() => setShowPassport(false)} 
-        autoScan={true}
-      />
+      {showPassport && (
+        <DigitalPassport 
+          deviceId="demo"
+          onClose={() => setShowPassport(false)} 
+          autoScan={true}
+        />
+      )}
     </>
   );
 }

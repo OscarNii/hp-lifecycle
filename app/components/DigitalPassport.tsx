@@ -175,17 +175,11 @@ export function DigitalPassport({ deviceId, onClose, autoScan = false }: Digital
             </div>
             <div className="flex items-center gap-2">
               <button
-                onClick={() => window.location.href = '/'}
+                onClick={onClose}
                 className="px-4 py-2 bg-white/20 rounded-lg text-sm font-medium hover:bg-white/30 transition-colors flex items-center gap-2"
               >
                 <Home className="w-4 h-4" />
-                Go to Dashboard
-              </button>
-              <button 
-                onClick={() => setShowFocusMode(!showFocusMode)}
-                className="px-4 py-2 bg-white/20 rounded-lg text-sm font-medium hover:bg-white/30 transition-colors"
-              >
-                {showFocusMode ? 'Exit Focus' : 'Enter Focus'}
+                Exit
               </button>
             </div>
           </div>
@@ -194,6 +188,14 @@ export function DigitalPassport({ deviceId, onClose, autoScan = false }: Digital
           <div className="bg-white dark:bg-slate-900 rounded-3xl shadow-2xl overflow-hidden">
             {/* Header with HP Logo */}
             <div className="relative bg-gradient-to-r from-slate-900 to-slate-800 p-6 text-white">
+              {/* Exit Button */}
+              <button 
+                onClick={onClose}
+                className="absolute top-4 right-4 p-2 bg-white/10 hover:bg-white/20 rounded-full transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+              
               <div className="flex items-start justify-between">
                 <div className="flex items-center gap-4">
                   <div className="w-16 h-16 bg-hp-blue rounded-2xl flex items-center justify-center">

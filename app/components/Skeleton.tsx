@@ -1,3 +1,5 @@
+'use client';
+
 import { ReactNode } from 'react';
 
 interface SkeletonProps {
@@ -13,7 +15,7 @@ export function Skeleton({
   width, 
   height 
 }: SkeletonProps) {
-  const baseClasses = 'animate-pulse bg-gray-200';
+  const baseClasses = 'animate-shimmer bg-gray-200';
   
   const variantClasses = {
     text: 'rounded',
@@ -89,6 +91,29 @@ export function TableSkeleton({ rows = 5, cols = 4 }: { rows?: number; cols?: nu
           </div>
         ))}
       </div>
+    </div>
+  );
+}
+
+// Page-level skeleton for full page loading
+export function PageSkeleton() {
+  return (
+    <div className="space-y-6">
+      {/* Header skeleton */}
+      <div className="flex items-center justify-between">
+        <Skeleton height="2.5rem" width="40%" />
+        <Skeleton height="2.5rem" width="20%" />
+      </div>
+      
+      {/* Cards grid skeleton */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <CardSkeleton />
+        <CardSkeleton />
+        <CardSkeleton />
+      </div>
+      
+      {/* Table skeleton */}
+      <TableSkeleton rows={5} cols={4} />
     </div>
   );
 }

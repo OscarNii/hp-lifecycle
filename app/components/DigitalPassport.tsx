@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { 
   Smartphone, 
   QrCode, 
@@ -16,7 +17,8 @@ import {
   Calendar,
   AlertCircle,
   CheckCircle2,
-  Info
+  Info,
+  Home
 } from 'lucide-react';
 
 interface DevicePassport {
@@ -109,12 +111,21 @@ export function DigitalPassport({ deviceId, onClose }: DigitalPassportProps) {
         <div className="absolute inset-0 bg-black/60 backdrop-blur-md" onClick={onClose} />
         
         <div className="relative z-10 bg-white dark:bg-slate-900 rounded-3xl p-8 max-w-md w-full mx-4 shadow-2xl">
-          <button 
+                      <div className="flex items-center gap-2">
+              <Link 
+                href="/"
+                className="px-4 py-2 bg-white/20 rounded-lg text-sm font-medium hover:bg-white/30 transition-colors flex items-center gap-2"
+              >
+                <Home className="w-4 h-4" />
+                Go to Dashboard
+              </Link>
+              <button 
             onClick={onClose}
             className="absolute top-4 right-4 p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full"
           >
             <X className="w-5 h-5" />
           </button>
+            </div>
 
           <div className="text-center">
             <div className="relative inline-block mb-6">
@@ -137,6 +148,14 @@ export function DigitalPassport({ deviceId, onClose }: DigitalPassportProps) {
             </p>
 
             {!isScanning && (
+                          <div className="flex items-center gap-2">
+              <Link 
+                href="/"
+                className="px-4 py-2 bg-white/20 rounded-lg text-sm font-medium hover:bg-white/30 transition-colors flex items-center gap-2"
+              >
+                <Home className="w-4 h-4" />
+                Go to Dashboard
+              </Link>
               <button
                 onClick={simulateScan}
                 className="w-full py-4 bg-hp-blue text-white rounded-xl font-semibold hover:bg-hp-blue/90 transition-all flex items-center justify-center gap-2"
@@ -144,6 +163,7 @@ export function DigitalPassport({ deviceId, onClose }: DigitalPassportProps) {
                 <Smartphone className="w-5 h-5" />
                 Simulate Scan
               </button>
+            </div>
             )}
           </div>
         </div>
@@ -168,12 +188,21 @@ export function DigitalPassport({ deviceId, onClose }: DigitalPassportProps) {
                 <p className="text-sm text-white/80">Device lifecycle timeline loaded</p>
               </div>
             </div>
-            <button 
+                        <div className="flex items-center gap-2">
+              <Link 
+                href="/"
+                className="px-4 py-2 bg-white/20 rounded-lg text-sm font-medium hover:bg-white/30 transition-colors flex items-center gap-2"
+              >
+                <Home className="w-4 h-4" />
+                Go to Dashboard
+              </Link>
+              <button 
               onClick={() => setShowFocusMode(!showFocusMode)}
               className="px-4 py-2 bg-white/20 rounded-lg text-sm font-medium hover:bg-white/30 transition-colors"
             >
               {showFocusMode ? 'Exit Focus' : 'Enter Focus'}
             </button>
+            </div>
           </div>
 
           {/* Main Passport Card */}
@@ -364,7 +393,15 @@ export function DigitalPassport({ deviceId, onClose }: DigitalPassportProps) {
 // QR Scanner trigger button
 export function PassportScannerTrigger({ onClick }: { onClick: () => void }) {
   return (
-    <button
+                <div className="flex items-center gap-2">
+              <Link 
+                href="/"
+                className="px-4 py-2 bg-white/20 rounded-lg text-sm font-medium hover:bg-white/30 transition-colors flex items-center gap-2"
+              >
+                <Home className="w-4 h-4" />
+                Go to Dashboard
+              </Link>
+              <button
       onClick={onClick}
       className="fixed bottom-20 right-6 z-40 p-4 bg-gradient-to-br from-hp-blue to-blue-600 text-white rounded-full shadow-lg hover:shadow-xl hover:scale-110 transition-all group"
     >
@@ -373,5 +410,6 @@ export function PassportScannerTrigger({ onClick }: { onClick: () => void }) {
         Scan Device Passport
       </span>
     </button>
+            </div>
   );
 }

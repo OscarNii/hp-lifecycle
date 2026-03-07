@@ -21,6 +21,7 @@ export function FloatingTriggers() {
       <DigitalPassport 
         deviceId={showPassport ? 'demo' : undefined}
         onClose={() => setShowPassport(false)} 
+        autoScan={true}
       />
     </>
   );

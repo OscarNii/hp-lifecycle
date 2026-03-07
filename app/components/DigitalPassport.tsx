@@ -45,6 +45,7 @@ interface DevicePassport {
 interface DigitalPassportProps {
   deviceId?: string;
   onClose: () => void;
+  autoScan?: boolean;
 }
 
 // Mock device data for HP EliteBook G11
@@ -69,7 +70,7 @@ const mockDevice: DevicePassport = {
   }
 };
 
-export function DigitalPassport({ deviceId, onClose }: DigitalPassportProps) {
+export function DigitalPassport({ deviceId, onClose, autoScan = false }: DigitalPassportProps) {
   const [device, setDevice] = useState<DevicePassport | null>(null);
   const [isScanning, setIsScanning] = useState(false);
   const [showFocusMode, setShowFocusMode] = useState(false);
@@ -85,9 +86,11 @@ export function DigitalPassport({ deviceId, onClose }: DigitalPassportProps) {
   };
 
   useEffect(() => {
-    // Auto-trigger scan for demo
-    simulateScan();
-  }, []);
+    // Only auto-scan if explicitly enabled
+    if (autoScan) {
+      simulateScan();
+    }
+  }, [autoScan]);
 
   const getHealthColor = (score: number) => {
     if (score >= 80) return 'text-green-500';

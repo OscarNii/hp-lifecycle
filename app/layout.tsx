@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Sidebar from "./components/Sidebar";
@@ -8,9 +8,21 @@ import { FloatingTriggers } from "./components/FloatingTriggers";
 
 const inter = Inter({ subsets: ["latin"] });
 
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+};
+
 export const metadata: Metadata = {
   title: "HP Product Version & Lifecycle Hub",
   description: "Enterprise dashboard for HP product version tracking and lifecycle management",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'default',
+    title: 'HP Lifecycle Hub',
+  },
 };
 
 export default function RootLayout({

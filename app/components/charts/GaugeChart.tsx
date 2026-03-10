@@ -1,6 +1,5 @@
 'use client';
 
-import { useState, useEffect } from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
 
 interface GaugeChartProps {
@@ -9,21 +8,13 @@ interface GaugeChartProps {
 }
 
 export default function GaugeChart({ value = 0, data }: GaugeChartProps) {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
   // Default gauge data if not provided
   const chartData = data || [
     { name: 'Complete', value: value, fill: '#0096D6' },
     { name: 'Remaining', value: 100 - value, fill: '#E5E7EB' },
   ];
   
-  const total = chartData.reduce((acc, item) => acc + item.value, 0);
-  
-  if (!mounted) {
+  if (typeof window === 'undefined') {
     return (
       <div className="w-full h-40 flex items-center justify-center bg-gray-50 rounded-lg">
         <span className="text-gray-400 text-sm">Loading chart...</span>

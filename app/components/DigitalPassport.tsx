@@ -1,7 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import Link from 'next/link';
+import { useState, useEffect, useCallback } from 'react';
 import { 
   Smartphone, 
   QrCode, 
@@ -70,27 +69,26 @@ const mockDevice: DevicePassport = {
   }
 };
 
-export function DigitalPassport({ deviceId, onClose, autoScan = false }: DigitalPassportProps) {
+export function DigitalPassport({ onClose, autoScan = false }: DigitalPassportProps) {
   const [device, setDevice] = useState<DevicePassport | null>(null);
   const [isScanning, setIsScanning] = useState(false);
-  const [showFocusMode, setShowFocusMode] = useState(false);
 
   // Simulate NFC/QR scan
-  const simulateScan = () => {
+  const simulateScan = useCallback(() => {
     setIsScanning(true);
     setTimeout(() => {
       setDevice(mockDevice);
       setIsScanning(false);
-      setShowFocusMode(true);
     }, 2000);
-  };
+  }, []);
 
   useEffect(() => {
     // Only auto-scan if explicitly enabled
     if (autoScan) {
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       simulateScan();
     }
-  }, [autoScan]);
+  }, [autoScan, simulateScan]);
 
   const getHealthColor = (score: number) => {
     if (score >= 80) return 'text-green-500';

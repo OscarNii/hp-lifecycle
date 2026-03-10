@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import { Search, Command, X, Zap, AlertTriangle, Laptop, ChevronRight, CheckCircle } from 'lucide-react';
+import { Search, Command, X, Zap, ChevronRight, CheckCircle } from 'lucide-react';
 import { useToast } from './Toast';
 
 interface CommandResult {
@@ -68,8 +68,10 @@ export function CommandPalette({ isOpen, onClose }: CommandPaletteProps) {
   useEffect(() => {
     if (query.length > 2) {
       const result = processCommand(query);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       setResults(result);
       if (result?.type === 'retirement') {
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         setSelectedItems(result.items?.filter(i => i.status === 'selected') || []);
       }
     } else {

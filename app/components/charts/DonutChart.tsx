@@ -1,6 +1,5 @@
 'use client';
 
-import { useState, useEffect } from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend } from 'recharts';
 
 interface DonutChartProps {
@@ -15,15 +14,9 @@ const defaultData = [
 ];
 
 export default function DonutChart({ data }: DonutChartProps) {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
   const chartData = data || defaultData;
 
-  if (!mounted) {
+  if (typeof window === 'undefined') {
     return (
       <div className="w-full h-48 flex items-center justify-center bg-gray-50 rounded-lg">
         <span className="text-gray-400 text-sm">Loading chart...</span>

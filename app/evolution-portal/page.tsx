@@ -5,7 +5,7 @@ import ProductTree from '../components/ProductTree';
 import EvolutionFlowDiagram from '../components/EvolutionFlowDiagram';
 import SidebarFilters from '../components/SidebarFilters';
 import { productFamilyTree, upgradePaths, evolutionFlowData } from '../data/mockData';
-import { ArrowRight, Zap, CheckCircle, AlertTriangle, Shield } from 'lucide-react';
+import { ArrowRight, Zap, CheckCircle, Shield } from 'lucide-react';
 
 const yearOptions = [
   { value: '2024', label: '2024' },

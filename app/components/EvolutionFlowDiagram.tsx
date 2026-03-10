@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { EvolutionNode } from '../data/mockData';
-import { ArrowRight, CheckCircle, AlertCircle, XCircle, Info } from 'lucide-react';
+import { CheckCircle, AlertCircle, XCircle, Info } from 'lucide-react';
 
 interface EvolutionFlowDiagramProps {
   data: EvolutionNode[];
@@ -56,7 +56,7 @@ export default function EvolutionFlowDiagram({ data }: EvolutionFlowDiagramProps
       <div className="relative min-w-[800px] py-8 px-4">
         {/* Connecting Lines */}
         <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ minHeight: '400px' }}>
-          {data.map((node, index) => {
+          {data.map((node) => {
             if (node.connectedTo.length === 0) return null;
             const nextNode = data.find((n) => n.id === node.connectedTo[0]);
             if (!nextNode) return null;

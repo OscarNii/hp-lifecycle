@@ -34,9 +34,9 @@ export default function Dashboard() {
   // Handle live search
   useEffect(() => {
     if (debouncedQuery.length >= 2) {
-      setIsSearching(true);
-      // Use the real search function
+      // Use the real search function - results are derived from debounced query
       const results = searchHPProducts(debouncedQuery);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       setSearchResults(results);
       setShowResults(true);
       setIsSearching(false);

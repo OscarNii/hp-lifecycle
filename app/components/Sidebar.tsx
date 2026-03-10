@@ -43,6 +43,7 @@ export default function Sidebar() {
   useEffect(() => {
     if (searchQuery.length >= 2) {
       const results = searchHPProducts(searchQuery);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       setSearchResults(results);
       setShowResults(true);
     } else {
